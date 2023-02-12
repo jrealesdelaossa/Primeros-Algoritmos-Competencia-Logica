@@ -15,6 +15,12 @@
     <div v-if="segundo" class="show-algoritmo">
       <segundo-algoritmo />
     </div>
+    <div v-if="tercero" class="show-algoritmo">
+      <tercer-algoritmo />
+    </div>
+    <div v-if="cuarto" class="show-algoritmo">
+      <cuarto-algoritmo />
+    </div>
     <br>
   </div>
 </template>
@@ -23,19 +29,30 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import PrimerAlgoritmo from "@/components/primerAlgoritmo.vue";
 import SegundoAlgoritmo from "@/components/segundoAlgoritmo.vue";
+import TercerAlgoritmo from "@/components/tercerAlgoritmo.vue";
+import CuartoAlgoritmo from "@/components/cuartoAlgoritmo.vue";
 export default {
   name: 'App',
   components: {
+    CuartoAlgoritmo,
+    TercerAlgoritmo,
     SegundoAlgoritmo,
     PrimerAlgoritmo,
     // HelloWorld
   },
   data() {
     return {
-      algoritmos: ["Suma de dos números", "Operación matemática"],
+      algoritmos: [
+          "Suma de dos números",
+          "Operación matemática",
+          "Entrada al cine",
+          "Número mayor"
+      ],
       algoritmoSeleccionado: "",
       primero: undefined,
       segundo: undefined,
+      tercero: undefined,
+      cuarto: undefined,
     }
   },
   methods: {
@@ -44,13 +61,31 @@ export default {
         this.primero = true;
 
         this.segundo = false;
+        this.tercero = false;
+        this.cuarto  = false;
       } else if (this.algoritmoSeleccionado === "Operación matemática") {
         this.segundo = true;
 
         this.primero = false;
+        this.tercero = false;
+        this.cuarto  = false;
+      } else if (this.algoritmoSeleccionado === "Entrada al cine") {
+        this.tercero = true;
+
+        this.primero = false;
+        this.segundo = false;
+        this.cuarto  = false;
+      } else if (this.algoritmoSeleccionado === "Número mayor") {
+        this.cuarto = true;
+
+        this.primero = false;
+        this.segundo = false;
+        this.tercero = false;
       } else {
         this.primero = false;
         this.segundo = false;
+        this.tercero = false;
+        this.cuarto  = false;
       }
     }
   }

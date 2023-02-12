@@ -1,19 +1,25 @@
 <template>
   <div class="main">
-    <h2>Operación matemática</h2>
-    <p>Ingresar dos números enteros, el resultado sera la multiplicación de esos dos números menos el primero</p>
+    <h2>Número mayor</h2>
+    <p>Digite tres números enteros, <strong>diferentes</strong> entre si. El algoritmo retornara el número mayor.</p>
 
     <div class="entrada">
       <label for="num1">Primer número: </label>
-      <input type="number" name="num1" id="num1" v-model="numero1" @change="resetear">
+      <input type="number" name="num1" id="num1" v-model="numero1" >
     </div>
     <br>
     <div class="entrada">
       <label for="num2">Segundo número: </label>
-      <input type="number" name="num2" id="num2" v-model="numero2" @change="resetear">
+      <input type="number" name="num2" id="num2" v-model="numero2" >
+    </div>
+    <br>
+    <div class="entrada">
+      <label for="num3">Tercer número: </label>
+      <input type="number" name="num3" id="num3" v-model="numero3" >
     </div>
 
-    <span>({{ numero1 }} * {{ numero2 }}) - {{ numero1}} = {{ resultado }}</span>
+    <p class="text">El número mayor es: </p>
+    <span>{{ resultado }}</span>
 
     <div class="boton-calcular">
       <button @click="calcular">Calcular</button>
@@ -23,17 +29,41 @@
 
 <script>
 export default {
-  name: "segundoAlgoritmo",
+  name: "cuartoAlgoritmo",
   data() {
     return {
-      resultado: 0,
+      mayor: 0,
       numero1: 0,
       numero2: 0,
+      numero3: 0,
+      resultado: "",
     }
   },
   methods: {
     calcular(){
-      this.resultado = (parseInt(this.numero1) * parseInt(this.numero2)) - this.numero1;
+      let num1 = this.numero1;
+      let num2 = this.numero2;
+      let num3 = this.numero3;
+
+      if (num1 !== num2 && num1 !== num3 && num2 !== num3) {
+        if (num1 > num2) {
+          if (num1 > num3) {
+            this.mayor = num1;
+          } else {
+            this.mayor = num3;
+          }
+        } else {
+          if (num2 > num3) {
+            this.mayor = num2;
+          } else {
+            this.mayor = num3;
+          }
+        }
+
+        this.resultado = `El número mayor es ${this.mayor}`;
+      } else {
+        this.resultado = "Por favor, números diferentes";
+      }
     },
 
     resetear() {
@@ -65,6 +95,10 @@ h2 {
   text-transform: uppercase;
 }
 
+.text {
+  margin: 24px 0 0 0;
+}
+
 input {
   border: none;
   background: #cdefcd;
@@ -76,8 +110,9 @@ input {
 }
 
 span {
+  height: 28px;
   margin: 24px;
-  font-size: 30px;
+  font-size: 20px;
   background-color: #ffffff;
   color: #00af00;
   padding: 12px;
